@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 声明sql语句 -->
+
+<!DOCTYPE mapper
+
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!-- namespace：对应的是一个接口UserMapper，关联xml文件 -->
+
+<mapper namespace="com.mybatis.dao.UserMapper">
+
+<!-- id表示的是接口中方法的名称，resultType表示的是接口中方法的返回值 -->
+
+ <!--  <select id="getUserByUid" resultType="com.mybatis.domain.User">
+
+  #{uid} 获取方法形参，uid表示通过@Param绑定的id
+
+    select * from s_user where uid = #{uid}
+
+  </select> -->
+  
+  <select id="getAll" resultType="Map">
+  
+    select * from s_user 
+  
+  </select>
+  
+   <select id="getUserById" resultType="map">
+  
+    select * from s_user where uid= #{uid}
+  
+  </select>
+  
+  <select id="getAlls" resultType="User">
+  
+    select * from s_user 
+  
+  </select>
+  
+  <select id="getUserLikeUname" resultType="User">
+  
+  select * from s_user where uname like #{name}
+  
+  </select>
+  
+<!--   插入用户 -->
+  
+  <insert id="add" >
+  
+  INSERT INTO s_user(uname,upwd) VALUES(#{name},#{pwd})
+  
+  </insert>
+  
+  <!-- 修改用户 -->
+ <update id="update" >
+ 
+ update s_user set uname =#{uname} where uid=#{uid}
+ 
+ </update>
+ 
+ <!-- 删除用户 -->
+ 
+ <delete id="del" >
+ 
+ delete from s_user where uid =#{id[0]}
+ 
+ </delete>
+ 
+ <delete id="delByid">
+
+		delete from s_user where uid in 
+
+		<!-- (12,5,6)  List<Integer> 遍历foreach  动态SQL拼接 SQL 语句
+
+		collection:表示被遍历的集合，书写集合传递的参数名
+
+		item：表示遍历出的一个数据-->
+
+		<foreach collection="id" item="id" open="(" separator="," close=")">
+
+			#{id}
+
+		</foreach>
+
+</delete>
+ 
+ 
+  <delete id="del1" >
+ 
+ delete from s_user where uid =#{param1[0]} 
+ 
+ </delete>
+
+</mapper>

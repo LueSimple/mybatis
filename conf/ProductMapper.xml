@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 声明sql语句 -->
+
+<!DOCTYPE mapper
+
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <!-- namespace：对应的是一个接口UserMapper，关联xml文件 -->
+
+<mapper namespace="com.mybatis.dao.ProductMapper">
+
+<!-- id表示的是接口中方法的名称，resultType表示的是接口中方法的返回值 -->
+
+  <select id="getProductByproID" resultType="com.mybatis.domain.Product">
+
+  <!-- #{uid} 获取方法形参，uid表示通过@Param绑定的id -->
+
+    select * from product where proID = #{proID}
+
+  </select>
+
+</mapper>
